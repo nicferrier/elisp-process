@@ -50,7 +50,6 @@
                 (gethash "10" elisp-process/list)
               queue)))))
 
-;; DEPENDS ON LARRY
 (ert-deftest elisp-process/dispatch-handler ()
   "Elnode specific dispatch processor."
   (let* (pid code-proc-result
@@ -60,11 +59,10 @@
     (flet ((code-proc (a b c) (setq code-proc-result (list a b c)))
            ;; Fake the json send to set the result
            (elnode-send-json (httpcon data)
+             ;; Mock larry-handle behaviour
              (larry/call
-              (web/json-parse
-               (json-encode data)
-               :json-array-type 'list)))
-           ;; Fake the call to the code
+              (web/json-parse (json-encode data) :json-array-type 'list)))
+           ;; Fake the call to starter to do nothing
            (elisp-process/call-starter (wrapper)))
       (setq pid (start-elisp-process
                  "testproc" code [:elnode-static "/path" 8000]))
