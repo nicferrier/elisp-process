@@ -56,7 +56,8 @@ Let bind this to turn it off.")
           (when after-init-lisp
             (let ((afl (concat "/tmp/" unique ".post-init.el")))
               (with-temp-file afl
-                (mapconcat (lambda (a) (format "%S" a)) after-init-lisp "\n"))
+                (insert
+                 (format "(progn %S)" after-init-lisp)))
               ;; Return the filename
               afl)))
          (args
