@@ -1,6 +1,6 @@
 ;;; tests for the run stuff
 
-(require 'elisp-prcess-run)
+(require 'elisp-process-run)
 (require 'ert)
 
 (ert-deftest elisp-process/rarchive-dir ()
