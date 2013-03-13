@@ -78,8 +78,8 @@ identifier."
   (interactive)
   (let ((pids (kvalist->keys (kvhash->alist elisp-process/list))))
     (loop for pid in pids
-         ;; We need this to actually send stop to the process
-         do (remhash pid elisp-process/list))))
+       ;; We need this to actually send stop to the process
+       do (remhash pid elisp-process/list))))
 
 (defun elisp-process-send (pid &rest msg)
   "Send MSG to the process PID."
